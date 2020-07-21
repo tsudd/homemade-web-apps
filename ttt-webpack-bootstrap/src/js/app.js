@@ -1,26 +1,28 @@
 "use strict"
 
-function Cell(id) {
+function Cell(elem) {
   this.content = 'o';
-  this.id = id;
   this.unfree = false;
+  this.cell = elem;
 }
-
-const classCell = 'cll';
 
 let application = function () {
 let turn = 1;
 let emptyCellsAmount = 9;
 let gameIsRunning = true;
 let cells = [];
-const id = "cl";
-const cell = "cell.png";
-const tic = "tic.png";
-const tac = "tac.png";
-for (let i = 0; i < 3; i++) {
+const ticClass = 'tic';
+const tacClass = 'tac';
+let info = document.getElementsByClassName('player-turn');
+let player = document.getElementsByClassName('turn');
+$(player).addClass(ticClass);
+let elmnts = document.getElementsByClassName('cell');
+$(info).html('Turn');
+for (let i = 0, k = 0; i < 3; i++) {
     let row = [];
-    for (let j = 0; j < 3; j++) {
-        row.push(new Cell(id + i + j));
+    for (let j = 0; j < 3; j++, k++) {
+        row.push(new Cell(elmnts[k]));
+        $(elmnts[k]).html(k + 1);
     }
     cells.push(row);
 }
@@ -62,17 +64,21 @@ let checkMethod = function checkCellsForWinner() {
 } 
 
 let showWinner = function show(str) {
-    let ans = '';
+    let ans = '', win = '';
     if (emptyCellsAmount == 0) {
         ans = 'DRAW';
     }
     if (str === 'XXX') {
-        ans = 'X win';
+        ans = 'win';
+        win = 'X';
     } else if (str === 'OOO') {
-        ans = 'O win';
+        ans = 'win';
+        win = 'O';
     }
     if (ans) {
-        // $(`#${info.id}`).html(ans);
+        $(player).removeClass([ticClass, tacClass]);
+        $(player).addClass((win) ? ((win === 'X') ? ticClass : tacClass) : '');
+        $(info).html(ans);
         gameIsRunning = false;
         return true;
     }
@@ -83,38 +89,50 @@ let restart = function restartGame() {
     turn = 1;
     gameIsRunning = true;
     emptyCellsAmount = 9;
-    info.text();
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
+    $(info).html('Turn');
+    $(player).addClass(ticClass);
+    let elements = document.getElementsByClassName('cell');
+    for (let i = 0, k = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++, k++) {
             cells[i][j].unfree = false;
             cells[i][j].content = 'o';
-            //$(`button[class='${classCell}']`).html(`<img src="Images/${application.cellIm()}">`);
+            $(elements[k]).removeClass(['tic', 'tac']);
         }   
     }
 }
 
 return {
     getTurn : (() => {
-    return turn;
+        return turn;
     }),
     getGameStatus : (() => {
-    return gameIsRunning;
+        return gameIsRunning;
     }),
     check : checkMethod,
     restart : restart,
-    cells : cells,
-    cellIm : (() => {
-    return cell;
-    }),
-    turn : function () {
-    let ans = turn ? tic : tac;
-    turn = turn ? 0 : 1;
-    info.text();
-    return ans;
+    getCell : function (id) {
+        let i = 1, j, k = id;
+
+        if (k > 3) {
+            while (k > 3) {
+                k -= 3;
+                i += 1;
+            }
+            j = k;
+        } else {
+            j = k;
+        }
+        return cells[i - 1][j - 1];
     },
     fillCell : (() => {
-    emptyCellsAmount--;
-    })
+        return (turn) ? ticClass : tacClass;
+    }),
+    endTurn : function () {
+        turn = turn ? 0 : 1;
+        emptyCellsAmount--;
+        $(player).removeClass([ticClass, tacClass]);
+        $(player).addClass((turn) ? ticClass : tacClass);
+    },
 };
 }();
 
@@ -122,15 +140,14 @@ $('.cell').click(function () {
     if (!application.getGameStatus()) {
         return;
     }
-    let ind = $(this).attr("id").slice(-2);
-    let cell = application.cells[ind[0]][ind[1]]; 
+    let cell = application.getCell($(this).html());
     if (cell.unfree) {
         return;
     }
-    $(this).html(`<img src="Images/${application.turn()}">`);
     cell.unfree = true;
-    cell.content = application.getTurn() ? 'O' : 'X';
-    application.fillCell();
+    cell.content = application.getTurn() ? 'X' : 'O';
+    $(this).addClass(application.fillCell());
+    application.endTurn();
     application.check();
 })
 
