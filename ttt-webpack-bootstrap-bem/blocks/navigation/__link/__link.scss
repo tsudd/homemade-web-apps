@@ -1,0 +1,17 @@
+.navigation__link {
+  text-decoration: none;
+  padding: 1em;
+  display: block;
+  color: black;
+  @media all and (max-width: 600px) {
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+} 
+
+.navigation__link:hover {
+  background: #CD5C5C;
+  color: white;
+}

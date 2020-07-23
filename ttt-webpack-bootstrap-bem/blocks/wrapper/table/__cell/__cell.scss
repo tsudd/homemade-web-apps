@@ -1,0 +1,20 @@
+@import "_tac/_tac.scss";
+@import "_tic/_tic.scss";
+
+
+.table__cell {
+  width: 200px;
+  height: 200px;
+  border-color: gray;
+  border-radius: 5px;
+  background-size: cover;
+  @media all and (max-width: 600px) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.table__cell:hover {
+  border-color: whitesmoke;
+  border-width: medium;
+}
