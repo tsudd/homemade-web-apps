@@ -5,5 +5,5 @@ This is my tic-tac-toc game in JS
 - [ ] using BEM methology
 - [X] using preprocessor SASS in SCSS syntax
 - [X] using webpack
-- [ ] minimalistic derictory structure 
-- [ ] clean github with good gitignore
+- [X] minimalistic derictory structure 
+- [X] clean github with good gitignore
