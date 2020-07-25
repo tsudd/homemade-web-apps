@@ -88,7 +88,7 @@ module.exports = {
             Popper: ['popper.js', 'default']
         }),
 
-        new ExtractTextPlugin("./img/styles.css"),
+        new ExtractTextPlugin("./css/styles.css"),
 
         // new CleanWebPack(),
 

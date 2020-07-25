@@ -1,8 +1,8 @@
 "use strict"
 
 // block constants (Is it good practice?)
-const ticClass = 'table__cell_tic';
-const tacClass = 'table__cell_tac';
+const ticClass = 'table__cell--tic';
+const tacClass = 'table__cell--tac';
 const cellClass = 'table__cell';
 const restartButtonClass = 'restart-btn';
 const turnHeaderClass = 'turn-header';

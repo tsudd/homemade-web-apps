@@ -1,6 +1,8 @@
-@import "_tac/_tac.scss";
-@import "_tic/_tic.scss";
-
+.table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .table__cell {
   width: 200px;
@@ -17,4 +19,12 @@
 .table__cell:hover {
   border-color: whitesmoke;
   border-width: medium;
+}
+
+.table__cell--tic {
+  background-image: url('tic.png');
+}
+
+.table__cell--tac {
+  background-image: url('tac.png');
 }

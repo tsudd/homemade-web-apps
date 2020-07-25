@@ -1,12 +1,12 @@
 @import "~bootstrap/scss/bootstrap";
-@import "navigation/navigation.scss";
-@import "wrapper/wrapper.scss";
-@import "wrapper/table/table.scss";
-@import "wrapper/line/line.scss";
-@import "wrapper/btn/btn.scss";
-@import "wrapper/caption/caption.scss";
-@import "wrapper/turn/turn.scss";
-@import "wrapper/turn-header/turn-header.scss";
+@import "navigation.scss";
+@import "wrapper.scss";
+@import "table.scss";
+@import "line.scss";
+@import "btn.scss";
+@import "caption.scss";
+@import "turn.scss";
+@import "turn-header.scss";
 
 body {
   background-color: rgb(134, 194, 214);

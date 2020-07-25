@@ -1,3 +1,20 @@
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 0; 
+  background-color: #FFA07A;
+  @media all and (max-width: 800px) {
+      justify-content: space-around;
+  }
+  @media all and (max-width: 600px) {
+    padding: 0;
+    flex-flow: column wrap;
+  }
+}
+
 .navigation__link {
   text-decoration: none;
   padding: 1em;
