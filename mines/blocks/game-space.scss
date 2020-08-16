@@ -1,0 +1,109 @@
+.game-space {
+  @include make-row();
+  margin: 5px;
+  padding: 10px;
+}
+
+.game-space__mine-field {
+  @include make-col-ready();
+  @include make-container();
+  margin: 5px;
+  padding: 20px;
+  width: 800px;
+  background-color: yellowgreen;
+  color: black;
+  font-size: xx-large;
+  text-align: center;
+  text-size-adjust: 100%;
+}
+
+.game-space__controls {
+  @include make-col-ready();
+  @include make-container();
+  width: 100px;
+  margin: 5px;
+  margin-left: 10px;
+  padding: 10px;
+  background-color: yellow;
+}
+
+.game-space__cell {
+  margin: 1px;
+  padding: 0px;
+  border-radius: 5px;
+  border-width: medium;
+  background-size: 100% 100%;
+  background-color: rgb(109, 109, 109);
+  color: black;
+  font-size: xx-large;
+  text-align: center;
+  text-size-adjust: 100%;
+}
+
+.game-space__cell:hover {
+  background-color: lightgoldenrodyellow;
+}
+
+.game-space__cell--zero-mine {
+  background-color: lightgoldenrodyellow;
+}
+
+.game-space__cell--one-mine {
+  background-color: lightgreen;
+}
+
+.game-space__cell--two-mine {
+  background-color: rgb(204, 178, 29);
+}
+
+.game-space__cell--three-mine {
+  background-color: orange;
+}
+
+.game-space__cell--four-mine {
+  background-color: tomato;
+}
+
+.game-space__cell--five-mine {
+  background-color: red;
+}
+
+.game-space__cell--six-mine {
+  background-color: indigo;
+}
+
+.game-space__cell--seven-mine {
+  background-color: purple;
+}
+
+.game-space__cell--eight-mine {
+  background-color: violet;
+}
+
+.game-space__cell--mine {
+  background-image: url(mine.png);
+}
+
+.game-space__cell--flag {
+  background-image: url(flag.png);
+}
+
+.game-space__cell--detonated {
+  background-color: crimson;
+}
+
+.game-space__mine-counter {
+  @include make-row();
+  @include make-col-ready();
+  background-color: lightseagreen;
+}
+
+.game-space__mine-counter-img {
+  @include make-row();
+}
+
+.game-space__mine-counter-label {
+  @include make-row();
+  color: gray;
+  font-size: xx-large;
+}

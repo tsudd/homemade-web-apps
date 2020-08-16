@@ -1,0 +1,11 @@
+.timer {
+  @include make-row();
+  @include make-col-ready();
+  width: 100px;
+}
+
+.timer__label {
+  @include make-row();
+  color: gray;
+  font-size: xx-large;
+}
