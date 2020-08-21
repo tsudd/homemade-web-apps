@@ -2,6 +2,9 @@
   @include make-row();
   @include make-col-ready();
   width: 100px;
+  @media all and (max-width: 1200px) {
+    @include make-col(12);
+  }
 }
 
 .timer__label {

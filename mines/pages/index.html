@@ -6,11 +6,33 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
-        <div class="navigation">
+        <!-- <div class="navigation">
             <h1 class="navigation__header">Mines</h1>
             <a class="navigation__link" href="https://github.com/tsudd/homemade-web-apps.git">Github</a>
             <a class="navigation__link" href="#">Help</a>
-        </div>
+        </div> -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="navbar-brand" href="">
+            <img src="./css/mine.png" width="50" height="50" alt="" loading="lazy">
+            Mines
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"  width="50" height="50" alt="" loading="lazy">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Rules</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
         <div class="wrapper">
           <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-secondary btn-group__small">8x8</button>

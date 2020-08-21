@@ -29,10 +29,6 @@ let application = function () {
     }
     $(minesCounterElement).html(field.getProgress());
   })
-
-  let resetCounter = (() => {
-    $(minesCounterElement).html('00/00');
-  })
   
   let deleteField = (() => {
     if (!field) {
@@ -54,20 +50,25 @@ let application = function () {
   })
 
   return {
-    createField : ((heigth, width) => {
+    createField : ((heigth, width, minePersent = percentageOfMines) => {
       if (field) {
         deleteField();
       }
-      let amountOfMines = Math.floor(heigth * width * percentageOfMines);
+      let amountOfMines = Math.floor(heigth * width * minePersent);
       field = new Field(heigth, width, amountOfMines, mineFieldClass, cellClass);
       firstClick = true;
-      resetCounter();
+      updateCounter();
+      $(window).trigger('resize');
     }),
     deleteField : deleteField,
-    pauseGame : (() => {
-      timer.pauseUnpause();
-    }),
     checkCell : ((clickedElement) => {
+      if (clickedElement.cell.hasMine) {
+        field.detonateCell(clickedElement.cell);
+        field.gameOver();
+        gameIsRunning = false;
+        this.pauseUnpauseGame();
+        return;
+      }
       field.checkCell(clickedElement.cell);
       checkWinStatus();
     }),
@@ -87,7 +88,6 @@ let application = function () {
       timer.startTimer();
     }),
     pauseUnpauseGame : (() => {
-      gameIsRunning = gameIsRunning ? false : true;
       timer.pauseUnpause();
     }),
     placeFlag : ((cell) => {
@@ -96,12 +96,27 @@ let application = function () {
     }),
     getFirstClick : (() => {
       return firstClick;
-    })
+    }),
+    getTimerStatus : (() => {
+      return timer.unactive;
+    }),
+    getFieldWidth : (() => {
+      return field.width;
+    }),
+    getFieldHeight : (() => {
+      return field.height;
+    }),
   }
 }();
 
 $( window ).resize(function() {
-  changeProportions(cellClass);
+  changeProportions(
+    cellClass, 
+    $(window).height(), 
+    $(`.${mineFieldClass}`).width(), 
+    application.getFieldWidth(),
+    application.getFieldHeight()
+    );
  });
 
  $(createSmallFieldButton).click(function () {
@@ -110,6 +125,10 @@ $( window ).resize(function() {
 
 $(createMediumFieldButton).click(function () {
   application.createField(16, 16);
+})
+
+$(createLargeFieldButton).click(function () {
+  application.createField(16, 30, 0.21);
 })
 
 $(`.${mineFieldClass}`).on('click', `.${cellClass}`, function (e) {
@@ -133,13 +152,13 @@ $(`.${mineFieldClass}`).on('click', `.${cellClass}`, function (e) {
 })
 
 $(`.${pauseButtonClass}`).click(function () {
-  if (application.getFirstClick()) {
+  if (!application.getGameStatus()) {
     return;
   }
   application.pauseUnpauseGame();
-  if (application.getGameStatus()) {
-    $(`.${cellClass}`).show();
-  } else {
+  if (application.getTimerStatus()) {
     $(`.${cellClass}`).hide();
+  } else {
+    $(`.${cellClass}`).show();
   }
 })

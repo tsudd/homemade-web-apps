@@ -28,14 +28,13 @@ export class Field {
     this.placedFlags = 0;
     for (let i = 0; i < height; i++) {
       let row = [];
-      $('.' + mineFieldClass).append(`<div class="row row-JS-${i}"></div>`);
+      $('.' + mineFieldClass).append(`<div class="row d-flex row-JS-${i} justify-content-center"></div>`);
       for (let j = 0; j < width; j++) {
         row.push(new Cell(i, j));
-        $(`.row-JS-${i}`).append(`<div class="col btn ${this.cellClass}"></div>`);
+        $(`.row-JS-${i}`).append(`<div class="btn ${this.cellClass}"></div>`);
       }
       this.cells.push(row);
     }
-    $('.' + this.cellClass).height($('.' + this.cellClass).width());
     while (mines > 0) {
       let i = this.getRandomInt(height);
       let j = this.getRandomInt(width);
@@ -98,12 +97,10 @@ export class Field {
     if (cell.clicked) {
       return;
     }
-    cell.clicked = true;
-    if (cell.hasMine) {
-      $(cell.elementPointer).addClass(this.cellClass + cellDetonatedModificator);
-      this.gameOver(cellMineModificator);
-      return;
+    if (cell.hasFlag) {
+      this.placeFlag(cell);
     }
+    cell.clicked = true;
     $(cell.elementPointer).html(cell.minesAround);
     $(cell.elementPointer).addClass(this.cellClass + cellModificators[cell.minesAround]);
     this.checkedCells++;
@@ -135,7 +132,7 @@ export class Field {
     }
   }
 
-  gameOver(modificator) {
+  gameOver(modificator = cellMineModificator) {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
         if (this.cells[i][j].hasMine) {
@@ -146,7 +143,7 @@ export class Field {
   }
 
   getProgress() {
-    return `${this.placedFlags < 10 ? '0' + this.placedFlags : this.placedFlags}/${this.minesToFind}`;
+    return `${this.placedFlags < 10 ? '0' + `${this.placedFlags}/${this.minesToFind}` : `${this.placedFlags}/${this.minesToFind}`}`;
   }
 
   placeFlag(cell) {
@@ -159,6 +156,10 @@ export class Field {
     $(cell.elementPointer).addClass(this.cellClass + cellFlagModificator);
     cell.hasFlag = true;
     this.placedFlags++;
+  }
+
+  detonateCell(cell) {
+    $(cell.elementPointer).addClass(this.cellClass + cellDetonatedModificator);
   }
 
   finishGame() {

@@ -3,6 +3,7 @@ export class Timer {
     this.value = 0;
     this.unactive = true;
     this.timerElement = timerHtmlElement;
+    this.intervalId;
   }
 
   getTimeString() {
@@ -26,7 +27,7 @@ export class Timer {
 
   startTimer() {
     let that = this;
-    setInterval(function () {
+    this.intervalId = setInterval(function () {
       if (that.unactive) {
         return;
       }
@@ -36,6 +37,7 @@ export class Timer {
   }
 
   reset() {
+    clearInterval(this.intervalId);
     $(this.timerElement).html('00:00');
     this.value = 0;
     this.unactive = true;
