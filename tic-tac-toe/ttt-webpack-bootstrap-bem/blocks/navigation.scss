@@ -6,10 +6,10 @@
   list-style: none;
   margin: 0; 
   background-color: #FFA07A;
-  @media all and (max-width: 800px) {
-      justify-content: space-around;
+  @include media-breakpoint-down(md) {
+    justify-content: space-around;
   }
-  @media all and (max-width: 600px) {
+  @include media-breakpoint-down(sm) {
     padding: 0;
     flex-flow: column wrap;
   }
@@ -20,7 +20,7 @@
   padding: 1em;
   display: block;
   color: black;
-  @media all and (max-width: 600px) {
+  @include media-breakpoint-down(sm) {
     text-align: center;
     padding: 10px;
     border-top: 1px solid black;

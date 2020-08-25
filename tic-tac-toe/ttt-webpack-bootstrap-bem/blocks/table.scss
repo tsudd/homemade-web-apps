@@ -1,19 +1,12 @@
 .table {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include make-container();
+  justify-content: center;
 }
 
 .table__cell {
-  width: 200px;
-  height: 200px;
   border-color: gray;
   border-radius: 5px;
-  background-size: cover;
-  @media all and (max-width: 600px) {
-    width: 100px;
-    height: 100px;
-  }
+  background-size: 100% 100%;
 }
 
 .table__cell:hover {

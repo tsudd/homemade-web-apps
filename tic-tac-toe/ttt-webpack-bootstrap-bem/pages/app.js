@@ -4,9 +4,27 @@
 const ticClass = 'table__cell--tic';
 const tacClass = 'table__cell--tac';
 const cellClass = 'table__cell';
+const tableClass = 'table';
 const restartButtonClass = 'restart-btn';
 const turnHeaderClass = 'turn-header';
 const turnLabelClass = 'turn';
+const navigationClass = 'navigation';
+
+$(document).ready(function () {
+  $(window).trigger('resize');
+})
+
+$( window ).resize(function() {
+  let size = 200;
+  let screenWidth = $(window).width();
+  if (screenWidth < 1200 && screenWidth > 700) {
+    size = Math.floor(Math.sqrt($(window).width() * 500 / 9));
+  } else if (screenWidth < 700) {
+    size = Math.floor((screenWidth - 156) / 3);
+  }
+  $(`.${cellClass}`).height(size);
+  $(`.${cellClass}`).width(size);
+ });
 
 class Cell {
   constructor (cellElement) {
