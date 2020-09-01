@@ -7,6 +7,7 @@ const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 // module settings
 module.exports = {
@@ -89,6 +90,12 @@ module.exports = {
         }),
 
         new CleanWebpackPlugin(),
+
+        new CopyPlugin({
+          patterns: [
+            { from: './pages/assets/', to: 'assets' },
+          ]
+        }),
     ],
 };
 

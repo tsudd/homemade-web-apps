@@ -61,15 +61,15 @@ let application = function () {
       $(window).trigger('resize');
     }),
     deleteField : deleteField,
-    checkCell : ((clickedElement) => {
-      if (clickedElement.cell.hasMine) {
-        field.detonateCell(clickedElement.cell);
+    checkCell : ((clickedCell) => {
+      if (clickedCell.hasMine) {
+        field.detonateCell(clickedCell);
         field.gameOver();
         gameIsRunning = false;
         this.pauseUnpauseGame();
         return;
       }
-      field.checkCell(clickedElement.cell);
+      field.checkCell(clickedCell);
       checkWinStatus();
     }),
     makeFirstClick : (() => {
@@ -106,13 +106,15 @@ let application = function () {
     getFieldHeight : (() => {
       return field.height;
     }),
+    getClickedCellObject : ((clickedElement) => {
+      return field.getCell(clickedElement);
+    })
   }
 }();
 
 $( window ).resize(function() {
   changeProportions(
-    cellClass, 
-    $(window).height(), 
+    cellClass,  
     $(`.${mineFieldClass}`).width(), 
     application.getFieldWidth(),
     application.getFieldHeight()
@@ -132,6 +134,12 @@ $(createLargeFieldButton).click(function () {
 })
 
 $(`.${mineFieldClass}`).on('click', `.${cellClass}`, function (e) {
+  let cell;
+
+  cell = application.getClickedCellObject(this);
+  if (!cell) {
+    return;
+  }
   if (application.makeFirstClick()) {
     application.startTimer();
   }
@@ -139,16 +147,16 @@ $(`.${mineFieldClass}`).on('click', `.${cellClass}`, function (e) {
     return;
   }
   if (e.ctrlKey) {
-    if (this.cell.clicked) {
+    if (cell.clicked) {
       return;
     }
-    application.placeFlag(this.cell);
+    application.placeFlag(cell);
     return;
   }
-  if (this.cell.hasFlag) {
+  if (cell.hasFlag) {
     return;
   }
-  application.checkCell(this);
+  application.checkCell(cell);
 })
 
 $(`.${pauseButtonClass}`).click(function () {

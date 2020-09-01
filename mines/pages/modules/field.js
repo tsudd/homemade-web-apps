@@ -46,7 +46,6 @@ export class Field {
     let cellsCollection = document.getElementsByClassName(cellClass);
     for (let i = 0, k = 0; i < height; i++) {
       for (let j = 0; k < cellsCollection.length && j < width; j++, k++) {
-        cellsCollection[k].cell = this.cells[i][j];
         this.cells[i][j].elementPointer = cellsCollection[k];
       }
     }
@@ -58,29 +57,17 @@ export class Field {
 
   fillCellWithMine(i, j) {
     this.cells[i][j].hasMine = true;
-    if (j - 1 >= 0) {
-      this.cells[i][j - 1].minesAround++;
-      if (i - 1 >= 0) {
-        this.cells[i - 1][j - 1].minesAround++;
+    for (let di = -1; di <= 1; di++) {
+      for (let dj = -1; dj <= 1; dj++) {
+        if (di == 0 && dj == 0) {
+          continue;
+        }
+        if (0 <= i + di && i + di< this.height) {
+          if (0 <= j + dj && j + dj < this.width) {
+            this.cells[i + di][j + dj].minesAround++;
+          }
+        }
       }
-      if (i + 1 < this.height) {
-        this.cells[i + 1][j - 1].minesAround++;
-      }
-    }
-    if (j + 1 < this.width) {
-      this.cells[i][j + 1].minesAround++;
-      if (i - 1 >= 0) {
-        this.cells[i - 1][j + 1].minesAround++;
-      }
-      if (i + 1 < this.height) {
-        this.cells[i + 1][j + 1].minesAround++;
-      }
-    }
-    if (i - 1 >= 0) {
-      this.cells[i - 1][j].minesAround++;
-    }
-    if (i + 1 < this.height) {
-      this.cells[i + 1][j].minesAround++;
     }
   }
 
@@ -105,29 +92,17 @@ export class Field {
     $(cell.elementPointer).addClass(this.cellClass + cellModificators[cell.minesAround]);
     this.checkedCells++;
     if (cell.minesAround == 0) {
-      if (cell.horizontalIndex - 1 >= 0) {
-        this.checkCell(this.cells[cell.verticalIndex][cell.horizontalIndex - 1]);
-        if (cell.verticalIndex - 1 >= 0) {
-          this.checkCell(this.cells[cell.verticalIndex - 1][cell.horizontalIndex - 1]);
+      for (let di = -1; di <= 1; di++) {
+        for (let dj = -1; dj <= 1; dj++) {
+          if (dj == 0 && di == 0) {
+            continue;
+          }
+          if (0 <= cell.verticalIndex + di && cell.verticalIndex + di < this.height) {
+            if (0 <= cell.horizontalIndex + dj && cell.horizontalIndex + dj < this.width) {
+              this.checkCell(this.cells[cell.verticalIndex + di][cell.horizontalIndex + dj]);
+            }
+          }
         }
-        if (cell.verticalIndex + 1 < this.height) {
-          this.checkCell(this.cells[cell.verticalIndex + 1][cell.horizontalIndex - 1]);
-        }
-      }
-      if (cell.horizontalIndex + 1 < this.width) {
-        this.checkCell(this.cells[cell.verticalIndex][cell.horizontalIndex + 1]);
-        if (cell.verticalIndex - 1 >= 0) {
-          this.checkCell(this.cells[cell.verticalIndex - 1][cell.horizontalIndex + 1]);
-        }
-        if (cell.verticalIndex + 1 < this.height) {
-          this.checkCell(this.cells[cell.verticalIndex + 1][cell.horizontalIndex + 1]);
-        }
-      }
-      if (cell.verticalIndex - 1 >= 0) {
-        this.checkCell(this.cells[cell.verticalIndex - 1][cell.horizontalIndex]);
-      }
-      if (cell.verticalIndex + 1 < this.height) {
-        this.checkCell(this.cells[cell.verticalIndex + 1][cell.horizontalIndex]);
       }
     }
   }
@@ -159,11 +134,24 @@ export class Field {
   }
 
   detonateCell(cell) {
+    alert("Mines exploded! Poor thing...")
     $(cell.elementPointer).addClass(this.cellClass + cellDetonatedModificator);
   }
 
   finishGame() {
+    alert("Well done! You won!");
     this.gameOver(cellFlagModificator);
+  }
+
+  getCell(clickedElement) {
+    for (let i = 0; i < this.height; i++) {
+      for (let j = 0; j < this.width; j++) {
+        if (clickedElement == this.cells[i][j].elementPointer) {
+          return this.cells[i][j];
+        }
+      }
+    }
+    return null;
   }
 }
 

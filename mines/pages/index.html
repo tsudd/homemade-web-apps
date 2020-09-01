@@ -6,12 +6,7 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
-        <!-- <div class="navigation">
-            <h1 class="navigation__header">Mines</h1>
-            <a class="navigation__link" href="https://github.com/tsudd/homemade-web-apps.git">Github</a>
-            <a class="navigation__link" href="#">Help</a>
-        </div> -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
           <div class="navbar-brand" href="">
             <img src="./css/mine.png" width="50" height="50" alt="" loading="lazy">
             Mines
@@ -19,20 +14,27 @@
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-        
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"  width="50" height="50" alt="" loading="lazy">
+                <a class="nav-link" href="https://github.com/tsudd/homemade-web-apps">
+                  <img src="./assets/githubLogo.png" width="50" height="50" alt="" loading="lazy">
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Rules</a>
+                <a class="nav-link" data-toggle="collapse" href="#rules" tabindex="-1" role="button" aria-expanded="false" aria-controls="rules">Rules</a>
               </li>
             </ul>
           </div>
         </nav>
+        <div class="collapse" id="rules">
+          <div class="card card-body">
+            <h2>Rules</h2>
+            <p>Your goal is to disable all mines and open all free cells/ Be carefull! If even one mine explode the hole game will end. To disable mines properly, pay attantion on numbers which every cell tells you. Number means how many mines are locate around. Good luck!</p>
+            <h3>Controls</h3>
+            <p>Hold control key if you want to set a flag on a cell and then click on the chosen cell.</p>
+          </div>
+        </div>
         <div class="wrapper">
           <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-secondary btn-group__small">8x8</button>
