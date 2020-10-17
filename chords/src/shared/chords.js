@@ -9,4 +9,9 @@ export const CHORDS = [
     name: "Em",
     urlImage: "#",
   },
+  {
+    id: 2,
+    name: "C",
+    urlImage: "#",
+  },
 ];
