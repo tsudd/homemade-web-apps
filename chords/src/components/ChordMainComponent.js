@@ -1,4 +1,4 @@
-import React;
+import React from "react";
 
 import CHORDS from "../shared/chords";
 import ChosenChordsList from "./ChosenChordsListComponent";
@@ -24,13 +24,17 @@ function ChordMainComponent(props) {
       }
     }
     setChosenChords(chosenChordsArray);
-  }
+  };
 
   return (
     <div>
       <h3>Main Component</h3>
-      <ChosenChordsList onClick={handleChosenChordClick} chords={chosenChords} />
-    </div>);
+      <ChosenChordsList
+        onClick={handleChosenChordClick}
+        chords={chosenChords}
+      />
+    </div>
+  );
 }
 
 export default ChordMainComponent;
