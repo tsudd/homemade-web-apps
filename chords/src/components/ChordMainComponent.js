@@ -19,7 +19,7 @@ function ChordMainComponent(props) {
   const handleChosenChordClick = (chord) => {
     const chosenChordsArray = [];
     for (let i = 0; i < chosenChords.length; i++) {
-      if (chosenChords[i].id != chord.id) {
+      if (chosenChords[i].id !== chord.id) {
         chosenChordsArray.push(chosenChords[i]);
       }
     }
