@@ -1,17 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
-import { CHORDS } from "./shared/chords";
+import ChordMainComponent from "./components/ChordMainComponent";
 
 function App() {
-  const [chosenChords, setChosenChords] = useState([]);
-
-  return (
-    <div className="wrapper">
-      <div className="logo">
-        <h1>ChordTrainer</h1>
-      </div>
-    </div>
-  );
+  return <ChordMainComponent />;
 }
 
 export default App;

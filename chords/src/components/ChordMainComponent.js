@@ -1,13 +1,14 @@
 import React from "react";
 
-import CHORDS from "../shared/chords";
+import { CHORDS } from "../shared/chords";
 import ChosenChordsList from "./ChosenChordsListComponent";
+import ChordList from "./ChordsListComponent";
 import { useState } from "react";
 
 function ChordMainComponent(props) {
   const [chosenChords, setChosenChords] = useState([]);
 
-  const handleChordChoosingClick = (chord) => {
+  const handleChordClick = (chord) => {
     if (chosenChords.includes(chord)) {
       return;
     }
@@ -33,6 +34,7 @@ function ChordMainComponent(props) {
         onClick={handleChosenChordClick}
         chords={chosenChords}
       />
+      <ChordList chords={CHORDS} onClick={handleChordClick} />
     </div>
   );
 }
