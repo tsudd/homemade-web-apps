@@ -4,6 +4,7 @@ import { CHORDS } from "../shared/chords";
 import ChosenChordsList from "./ChosenChordsListComponent";
 import ChordList from "./ChordsListComponent";
 import { useState } from "react";
+import PlayField from "./PlayFieldComponent";
 
 function ChordMainComponent(props) {
   const [chosenChords, setChosenChords] = useState([]);
@@ -34,6 +35,7 @@ function ChordMainComponent(props) {
         onClick={handleChosenChordClick}
         chords={chosenChords}
       />
+      <PlayField chosenChords={chosenChords} />
       <ChordList chords={CHORDS} onClick={handleChordClick} />
     </div>
   );
